@@ -15,27 +15,25 @@ int main()
 	char message[78] = "KUHPVIBQKVOSHWHXBPOFUXHRPVLLDDWVOSKWPREDDVVIDWQRBHBGLLBBPKQUNRVOHQEIRLWOKKRDD";
 	char decrypt[78] = "KUHPVIBQKVOSHWHXBPOFUXHRPVLLDDWVOSKWPREDDVVIDWQRBHBGLLBBPKQUNRVOHQEIRLWOKKRDD";
 	int i;
+	int count = 0;
 	printf("Decrypting: \n%s", message);
 
 	for (int key = 0; key < 26; key++) {
+		count = 0;
 		for (i = 0; message[i] != '\0'; ++i) {
 			ch = message[i];
-			if (ch >= 'a' && ch <= 'z') {
-				ch = ch - key;
-				if (ch < 'a') {
-					ch = ch + 'z' - 'a' + 1;
-				}
-				decrypt[i] = ch;
-			}
-			else if (ch >= 'A' && ch <= 'Z') {
+			if (ch >= 'A' && ch <= 'Z') {
 				ch = ch - key;
 				if (ch < 'A') {
 					ch = ch + 'Z' - 'A' + 1;
 				}
 				decrypt[i] = ch;
+				if (decrypt[i] == 'A' || decrypt[i] == 'E' || decrypt[i] == 'T') {
+					count++;
+				}
 			}
 		}
-		printf("\n\nDecrypted message: Shift %d\n%s", key, decrypt);
+		printf("\n\nDecrypted message: Shift %d Count = %d \n%s", key, count, decrypt);
 	}
 	return 0;
 }
